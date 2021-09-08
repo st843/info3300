@@ -36,30 +36,61 @@
     
   
   
-  
+  // vector images are mathematically defined - not by pixels
+  // mathematical representation is more concise
+  // SVG more efficient for changing/animating images
+  // pixels are efficient for some things tho
   
     <h5>HTML for today:</h5>
 
     <h3>Shapes and Coordinates</h3>
 
     <p>The coordinate system starts at the top left corner, (0,0). Positive y values move down towards the bottom. Positive x values move towards the right. We can use DOM attributes or CSS to apply styles to elements.</p>
-
+   
     <br>
     
-    <!--- SVG goes here! --->
-    
-    
+    <!--- SVG goes here! ---> <!--- always need width and height --->
+    <!--- SVG coordinates start in the upper left! y goes downard, x goes righward!
+      stroke = outline, or color of the line --->
+    <svg width=500 height=500 style="border: 1px solid black; margin: 30px;"> 
+      <!-- stuff on bottom: -->
+      <circle cx=50 cy=300 r=20 fill="purple"/>
+
+      <!-- stuff on top -->
+      <line x1=25 x2=50 y1=25 y2=300 stroke="goldenrod" stroke-width=3 /> 
+      <!-- line has x1, x2 -->
+      <!-- layering - purely based on the order of elements in the svg. currently, line is on top of circle -->
+       <!-- x and y are in the upper left - over 100, down 400 -->
+
+      <!-- shape gets cut off if larger than canvas - called "clipping", keep track of this!-->
+      <rect x=100 y=400 width=200 height=200 fill="orange" stroke="limegreen" stroke-width=5 />
+
+
+      <!-- can use HTML properties for styling, or CSS styling -->
+      <rect x=300 y=50 width=200 height=200 style="fill:deepskyblue; stroke:red; stroke-width:10px;"/>
+      
+      <!-- must create an HTML tag and put stuff in between the tags -->
+      <!-- x and y are the lower left corner of your text by default - to change, use dominant baseline -->
+      <text x=100 y=100 fill="blue" style="font: bold 20px sans-serif;" dominant-baseline="hanging" text-anchor="middle" > HELLO </text> 
+      <!-- use dominant baseline/anchor for centering text! -->
+
+     
+
+    </svg>
 
 
     <h3>Paths</h3>
 
     <p>This is the most complicated SVG element, but also one of the most useful. It contains <a href="https://www.w3.org/TR/SVG/paths.html#PathData">a tiny programming language</a>.</p>
-
+<!-- maps the path of the line to make a shape, only the d property matters! -->
+<!-- within d is the programming langauge - directions -->
+<!-- m = move the pen without drawing anything, h=draw a horizontal line v=vertical line -->
     <br>
 
     <svg height=200 width=200 style="border:1px solid black; margin-bottom: 50px;">
       
       <!--- Making some gridlines! --->
+      <!-- M 0 20 means go to x=0, y=20 -->
       <path style="stroke:#ccc; stroke-width:1" d="M 0 20 H 200" />
       <path style="stroke:#ccc; stroke-width:1" d="M 0 40 H 200" />
       <path style="stroke:#ccc; stroke-width:1" d="M 0 60 H 200" />
@@ -81,10 +112,8 @@
       <path style="stroke:#ccc; stroke-width:1" d="M 180 0 V 200" />
 
       <!--- Now let's draw a polygon --->
-      
-      
-      
-      
+      <path style="stroke:lightpink; stroke-width:10; fill:limegreen;" d="M 40 40 H 140 L 100 100 V 180 H 20 Z" />
+      <!-- look at documentation! -->
       
     </svg>
 
@@ -103,6 +132,7 @@
     
     
     <svg height="200" width="200">
+
       
     </svg>
     
