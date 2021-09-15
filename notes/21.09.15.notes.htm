@@ -59,22 +59,113 @@
     //  This will take the form of a bar chart -- but we are using a trick and not creating <rect> for each bar
     //  Instead, we'll make a thick vertical <line> for each bar. I don't recommend you do this outside of toy examples
 
-    
-    
+    let svg=d3.select("svg#all");
+    console.log(svg);
+    let width = svg.attr("width");
+    let height = svg.attr("height");    
+    console.log(width, height);
+
+    let ageScale = d3.scaleLinear().domain( [0, 80]).range([10, width-10]);
+    console.log(ageScale);
+    console.log(ageScale(0));
+
+    let maxMortality = d3.max( passengers, d => Math.max(d.died, d.lived ));
+    //console.log(maxMortality);
+
+    let livedScale = d3.scaleLinear()
+                        .domain( [0, maxMortality] )
+                        .range( [0, height/2.0 -10]);
+                      
+    console.log(livedScale(120));
+
+    passengers.forEach(( d, i) => {
+      //console.log(d);
+
+      svg.append("line")
+          .attr("x1", ageScale(d.age))
+          .attr("x2", ageScale(d.age))
+          .attr("y1", height/2.0)
+          .attr("y2", height/2.0 - livedScale(d.lived))
+          .style("stroke", "blue")
+          .style("stroke-width", 10)
+    } );
+
     
     
     
     // --- 2. What about deaths? (oop, things are getting pretty dark)
     //  We can make a double histogram for this!
     
+    let diedScale = d3.scaleLinear()
+                      .domain( [0, maxMortality]) //domain and range should be consistent across scales
+                      //NEVER hard code the domain!!!!!!!!
+                      .range( [0, height/2.0 - 10]);
     
-    
+                      
+    passengers.forEach(( d, i) => {
+      //console.log(d);
 
+      svg.append("line")
+          .attr("x1", ageScale(d.age))
+          .attr("x2", ageScale(d.age))
+          .attr("y1", height/2.0)
+          .attr("y2", height/2.0 + diedScale(d.died))
+          .style("stroke", "red")
+          .style("stroke-width", 10)
+    } );
+
+    passengers.forEach(( d, i) => {
+      //console.log(d);
+
+      svg.append("text")
+          .attr("text-anchor", "middle")
+          .attr("font-size", "15px")
+          .attr("x", ageScale(d.age))
+          .attr("y", height/2.0 - livedScale(d.lived))
+          .text( d['age'])
+    } );
 
 
 
     // --- 3. Let's break the data down by gender now!
     
+    passengersMale.forEach( d => {
+      //fails if 0 lived and 0 died
+      if (d.lived + d.died > 0) {
+        d.percentSurvived = d.lived/(d.lived + d.died)
+      }
+
+      else {
+        d.percentSurvived = 0;
+      }
+      
+    });
+    console.log(passengersMale);
+
+    passengersFemale.forEach( d => {
+
+      d.percentSurvived = d.lived/ (d.lived + d.died)
+    });
+
+
+    //overwrite old svg pointer
+    svg = d3.select("svgMale");
+    console.log(svg);
+    width = svg.attr("width");
+    height = svg.attr("height");
+
+    ageScale = d3.scaleLinear()
+                  .domain( [0, 80])
+                  .range( [10, width - 10]);
+    
+    let percentScale = d3.scaleLinear()
+                          .domain( [0,1]) //should hardcode only for percentage
+                          .range([height-10, 30]) //inversion trick for every charts (max, min) - more straightforward without the math
+    
+    let colorScale = d3.scaleLinear()
+                        .domain( [0,1])
+                        .range(['navy', 'turquoise'])
+                        .interpolate(d3.interpolateHcl); //color range - blends
     
     
     
