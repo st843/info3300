@@ -60,28 +60,44 @@
   <script id="notes">
   
     // --- 1
-    //  '../datasets/titanic.json'
-    console.log( '---Top of file---' );
+    // //  '../datasets/titanic.json'
+    // console.log( '---Top of file---' );
+    // console.log( d3.json( '../datasets/titanic.json')); //does not return the dataset - only a promise
+    // console.log( 'When will this print?') 
                   
+    // d3.json('../datasets/titanic.json').then( (data) => {
+    //   console.log(data);
+    // }) // then - attaches function once the promise is fulfilled
     
+    // console.log('2: when will this print?');
+    // console.log(data);
     
+    // var dataset;
+    // d3.json('../datasets/titanic.json').then( (data) => {
+    //   //all of your code has to go here!
+    // })
 
     // --- 2
     // Let's make a plain old scatterplot
 
     // 0. Find our SVG and get that ready
     //     We're going to use a new way of padding that makes axes easier
-    // const svg = d3.select('svg#scatterplot');
-    // const width = svg.attr('width');
-    // const height = svg.attr('height');
-    
+    const svg = d3.select('svg#scatterplot');
+    const width = svg.attr('width');
+    const height = svg.attr('height');
+    const margin = {top: 10, left: 50, bottom: 50, right: 10};
+    const chartWidth = width-margin.left - margin.right;
+    const chargHeight = height - margin.top - margin.bottom;
+    const chartArea = svg.append('g')
+                          .attr('transform', `translate(${margin.left}, ${margin.top})`); //` is a string template - fancy string to include values
     
     
     
     // 1. Import some CSV data
     //        .then( function(successfulResult), function(errorMessage) )
-    
-    
+    d3.csv('../datasets/gapminder.csv').then( data => {
+      console.log(data);
+  
             
     // 2. Check for data issues
     
@@ -122,7 +138,7 @@
     
     
 
-  
+    });
 
 
   </script>
