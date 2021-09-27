@@ -231,12 +231,10 @@
     // 5. Let's add some axes
     // We're going to use D3's axis tools to do it
     let leftAxis = d3.axisLeft(lifeScale);
-<<<<<<< HEAD
     console.log(leftAxis);
     svg.append("g")
         .attr("class", "y axis") //tells you what this is
         .attr();    
-=======
     svg.append('g')
       .attr('class', 'y axis')
       .attr('transform',`translate(${margins.left-10},${margins.top})`) 
@@ -259,7 +257,6 @@
     //  Make a d3.axis(scale) element  (such as d3.axisLeft(lifeScale)
     //  Run .call(axisElement) on your G tag to 'paste' the axis HTML code into the G tag
     //   (this is equivalent to running the axisElement on the G tag)
->>>>>>> 21afb29f65a72463bcab9ad2da57ac9d0da3f5bd
     
     // 5A. We can manually make some gridlines
     //  It would work fine for HW4, but I don't recommend it once you start using axis labels
