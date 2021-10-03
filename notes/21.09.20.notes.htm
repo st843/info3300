@@ -136,8 +136,8 @@
     
     // 1. Import some CSV data
     //        .then( function(successfulResult), function(errorMessage) )
-    d3.csv('../datasets/gapminder.csv').then( data => {
-      console.log(data);
+    d3.csv('../datasets/gapminder.csv').then( data => 
+      console.log(data));
   
     const margins = {top: 10, right: 10, bottom: 50, left: 50}; // You can also include quotes
     const chartWidth = width - margins.left - margins.right;
@@ -202,7 +202,7 @@
       chartArea.append('circle')
           .attr('cx', gdpScale(d['gdp']))
           .attr('cy', lifeScale(d['life']))
-          .attr('r', popScale(d['pop']))
+          .attr('r', 3)
           .attr('opacity', 0.8)
           .attr('index', i)  // I usually include the index as an extra attr so that if points look weird, I can find out what's going on in the dataset
           .style('fill', 'steelblue');
@@ -284,7 +284,7 @@
                           .tickFormat('');
     // Notice how we use a different class
     svg.append('g').attr('class', 'y gridlines') // See CSS at top of file
-      .attr('transform',`translate(${margins.left-10},${margins.top})`)
+       .attr('transform',`translate(${margins.left-10},${margins.top})`)
       .call(leftGridlines);
     // Make sure to set a gridlines class so you can distinguish it from your axes when styling
     
@@ -310,7 +310,7 @@
     
 
     });
-  });
+
   
 
 

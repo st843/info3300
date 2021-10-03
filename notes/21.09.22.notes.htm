@@ -194,7 +194,11 @@
         
     // --- 2
     // 5. Add some mouseovers
-    
+    circle.on('mouseover', function() {
+      console.log( this );
+
+      d3.select('#label').text( d['title'] );
+    });
       
     
 
