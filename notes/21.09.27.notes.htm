@@ -263,8 +263,7 @@
                          .attr("cx", d => yearScale(d['year']))
                          .attr("cy", d => grossScale(d['worldwide_gross']+1))
                          .attr("r", d => imdbScale(d['imdb_rating']))
-                         .style("fill", d => genreScale(d['Main_Genre']))
-                         .attr("opacity", 0.8);
+                         .style("fill", d => genreScale(d['Main_Genre']))                         .attr("opacity", 0.8);
                         
   // We have .forEach, so we need to assign .on() to all of the circles and use their data to fill
   // This could also be written as chartArea.selectAll("circle").on() but storing a var is more efficient 
