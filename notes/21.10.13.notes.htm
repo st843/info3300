@@ -183,18 +183,18 @@
                          .range(["#fff","#d1e8ed","#adc2da","#8879b3","#762b80"]);
   
   
-     // //  If you want to use a log scale instead of a linear quantile (which might work better):
-     // //   Here is one way to do this (note the use of Symlog because our domain includes 0)
-     // //   We create a new function that feeds the data value into a Symlog scale programmed to return 0 to 1
-     // //   It then routes the [0,1] value to interpolateGnBu, which returns a color, doing what we want
-     // //   Just like with normal scales, you feed them a data value and get back a color/pixel
-     // const colorScale = d => d3.interpolateGnBu( d3.scaleSymlog().domain(minMax).range([0,1])(d) );
-     // colorScale.domain = () => minMax;  // Hack to get legend working again because it uses scale.domain()
-     // // Another way to do this would be:
-     // const colorScale = d3.scaleLog().domain(minMax).interpolate(d => d3.interpolateGnBu)
-     // // Getting a scaleQuantile to work would be a bit trickier
-     // // You'll want to think about how to adjust the domain of the scale (hint: d3.map to transform data)
-     // //   and then also how you're going to show the values legend in the bottom scale
+    //  //  If you want to use a log scale instead of a linear quantile (which might work better):
+    //  //   Here is one way to do this (note the use of Symlog because our domain includes 0)
+    //  //   We create a new function that feeds the data value into a Symlog scale programmed to return 0 to 1
+    //  //   It then routes the [0,1] value to interpolateGnBu, which returns a color, doing what we want
+    //  //   Just like with normal scales, you feed them a data value and get back a color/pixel
+    //  const colorScale = d => d3.interpolateGnBu( d3.scaleSymlog().domain(minMax).range([0,1])(d) );
+    //  colorScale.domain = () => minMax;  // Hack to get legend working again because it uses scale.domain()
+    //  // Another way to do this would be:
+    //  const colorScale = d3.scaleLog().domain(minMax).interpolate(d => d3.interpolateGnBu)
+    //  // Getting a scaleQuantile to work would be a bit trickier
+    //  // You'll want to think about how to adjust the domain of the scale (hint: d3.map to transform data)
+    //  //   and then also how you're going to show the values legend in the bottom scale
   
   
     // 3d. Recolor the states to make a choropleth map
@@ -205,6 +205,7 @@
     drawLegend(d3.select("#colorLegend"), colorScale);
   
     
+    // for later: 
   
     // 4. Add a tooltip that "sticks" below the state
     let tooltipWidth = 120;
@@ -244,8 +245,7 @@
                      .attr("y", 22);
     
     
-                     
-  
+    
     d3.selectAll(".state").on("mouseenter", mouseEntersPlot);
     d3.selectAll(".state").on("mouseout",  mouseLeavesPlot);
   
@@ -312,9 +312,17 @@
      momesh.attr("d", "");
   
     }
+    function mouseEntersPlot() {
+    }
+  
+    function mouseLeavesPlot() {
+    }
     
     
-  }
+    
+    
+    
+  };
   // END OF REQUESTDATA()
   requestData();
   
